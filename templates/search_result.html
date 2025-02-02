@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="section-hero overlay inner-page bg-image">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="text-white font-weight-bold">Search Result</h1>
+        <div class="custom-breadcrumbs">
+          <a href="{% url 'home' %}">Home</a> / <strong class="text-white">Search Result</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Job Listings -->
+<section class="site-section bg-light" id="next-section">
+  <div class="container">
+    <div class="row">
+      {% for job in page_obj %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <a href="{% url 'single-job' job.id %}" class="block text-center">
+          <span class="custom-icon mx-auto"><i class="icon-magnet"></i></span>
+          <h3>{{ job.title }}</h3>
+          <ul class="list-unstyled mb-2">
+            <li>
+              {% if job.job_type == '1' %}
+              <span class="badge badge-primary">Full Time</span>
+              {% elif job.job_type == '2' %}
+              <span class="badge badge-danger">Part Time</span>
+              {% else %}
+              <span class="badge badge-info">Internship</span>
+              {% endif %}
+            </li>
+            <li><span class="badge badge-secondary">{{ job.location }}</span></li>
+          </ul>
+          <p>{{ job.description|truncatechars:100 }}</p>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% include 'paginator.html' %}
+  </div>
+</section>
+
+{% endblock %}

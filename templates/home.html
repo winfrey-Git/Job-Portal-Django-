@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- HERO SEARCH SECTION -->
+<section class="home-section section-hero overlay d-flex align-items-center justify-content-center">
+  <div class="container text-center">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <h1 class="font-weight-bold mb-4">Find Your Dream Job Today</h1>
+        <p class="mb-4">Join thousands of job seekers and connect with top companies.</p>
+        <div class="search-container mt-4">
+          <!-- Include the search form from 'search.html' -->
+          <form method="GET" action="{% url 'search_result' %}" class="search-jobs-form d-flex">
+            {% include 'search.html' %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#next" class="scroll-button smoothscroll">
+    <span class="icon-keyboard_arrow_down"></span>
+  </a>
+</section>
+
+<!-- STATS SECTION -->
+<section id="next" class="py-5 bg-success w-100">
+  <div class="container-fluid">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-7 text-center">
+        <h2 class="section-title mb-2">JobPortal Stats</h2>
+      </div>
+    </div>
+
+    <div class="row pb-0 section-counter">
+      <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+        <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+          <strong class="number" data-number="{{ total_candidates }}">0</strong>
+          <span class="caption">Candidates</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+        <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+          <strong class="number" data-number="{{ total_jobs }}">0</strong>
+          <span class="caption">Jobs Posted</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+        <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+          <strong class="number" data-number="{{ total_completed_jobs }}">0</strong>
+          <span class="caption">Jobs Filled</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+        <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+          <strong class="number" data-number="{{ total_companies }}">0</strong>
+          <span class="caption">Companies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRENDING JOBS SECTION -->
+<section class="py-5 bg-light w-100">
+  <div class="container-fluid">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-8 text-center">
+        <h2 class="section-title mb-3">Trending Jobs</h2>
+        <p class="lead">Explore jobs currently trending on our portal.</p>
+      </div>
+    </div>
+    <div class="row">
+      {% for job in trending_jobs %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ job.title }}</h5>
+            <p class="card-text"> {{ job.company_name }}, {{ job.location }}</p>
+            <a href="{{ job.get_absolute_url }}" class="btn btn-success mt-3">View Job</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p>No trending jobs available at the moment.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION SECTION -->
+<section class="py-5 bg-light text-center w-100">
+  <div class="container">
+    <h2 class="mb-4">Looking for a Job?</h2>
+    <p class="lead">Join thousands of job seekers and find your dream job today!</p>
+    <a href="{% url 'register' %}" class="btn btn-warning btn-lg mt-3">Sign Up Now</a>
+  </div>
+</section>
+
+{% endblock %}

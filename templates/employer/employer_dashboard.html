@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Employer Dashboard</h2>
+
+    <!-- Dashboard Stats Section -->
+    <div class="row text-center mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>Total Jobs Posted</h5>
+                <p class="display-6">{{ total_jobs }}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>Active Applications</h5>
+                <p class="display-6">{{ active_applications }}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>Pending Reviews</h5>
+                <p class="display-6">{{ pending_reviews }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Listings Section -->
+    <h4 class="mt-4">Your Job Posts</h4>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Job Title</th>
+                <th>Status</th>
+                <th>Applications</th>
+                <th>Posted On</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.status }}</td>
+                    <td>{{ job.applications_count }}</td>
+                    <td>{{ job.created_at|date:"Y-m-d" }}</td>
+                    <td>
+                        <a href="{% url 'edit_job' job.id %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'delete_job' job.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No jobs posted yet.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Action Button to Create a New Job -->
+    <div class="text-end mt-4">
+        <a href="{% url 'create_job' %}" class="btn btn-primary">Post a New Job</a>
+    </div>
+</div>
+{% endblock %}

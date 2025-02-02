@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ job.title }} {% endblock %}
+
+{% block content %}
+<h1>{{ job.title}}</h1>
+<p>{{ job.description }}</p>
+<p>Company name: {{ job.company_name }}</p>
+<p>Company Description: {{ job.company_description }}</p>
+<p>location: {{ job.location }}</p>
+<p>Type: {{ job.type }}</p>
+<p>Category: {{ job.category }}</p>
+<p>Salary: {{ job.salary }}</p>
+<p>Posted Date: {{ job.posted_date }}</p>
+<p>Deadline Date: {{ job.deadline_date }}</p>
+<p>published: {{ job.published_at }}</p>
+<p>Closed: {{ job.closed_at }}</p>
+<p>Timestamp: {{ job.timestamp }}</p>
+<p>Vacancy: {{ job.vacancy }}</p>
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-white text-center py-5">
+    <h1 class="page-title">Job Listings</h1>
+</div>
+    
+<div class="container my-5">
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="card-title">{{ job.title }}</h3>
+                    <p class="card-text"><strong>Company:</strong> {{ job.company_name }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
+                    <p class="card-text"><strong>Type:</strong> {{ job.type }} | <strong>Category:</strong> {{ job.category }}</p>
+                    <a href="{{ job.get_absolute_url }}" class="btn btn-success">Apply Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

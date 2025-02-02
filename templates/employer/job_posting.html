@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Create a New Job Posting</h2>
+
+    <!-- Display success or error messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} mt-3">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" class="shadow p-4 bg-white rounded">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-md-8">
+                {{ form.as_p }}
+            </div>
+
+            <div class="col-md-4">
+                <label for="categories" class="form-label">Select Category:</label>
+                <select name="category" id="categories" class="form-select mt-2">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Post Job</button>
+    </form>
+</div>
+{% endblock %}
