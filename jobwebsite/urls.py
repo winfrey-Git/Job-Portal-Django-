@@ -5,7 +5,7 @@ from jobwebsite.ViewsFolder.employee import job_application, employee_dashboard
 from jobwebsite.ViewsFolder.auth import login, logout, register, password_reset
 from django.contrib.auth import views as auth_views
 from jobwebsite.ViewsFolder.home import Search
-from jobwebsite.ViewsFolder.home import home
+
 
 
 urlpatterns=[
@@ -28,4 +28,5 @@ urlpatterns=[
     path('search/', Search.search_result_view, name='search_result'),
     path('job_application/',job_application.apply_job_view, name='job_application'),
     path('job_posting/',job_posting.create_job_view, name='job_posting'),
+
 ]
